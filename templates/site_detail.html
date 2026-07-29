@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ sid }} · {{ cfg.APP_TITLE }}{% endblock %}
+{% block body %}
+<a class="back" href="{{ url_for('sites') }}">← All sites</a>
+<div class="page-head" style="margin-top:10px">
+  <div>
+    <h1>{{ sid }}</h1>
+    <div class="sub">
+      {{ site.region or 'Region —' }} · {{ site.power_setup or 'Power setup —' }} ·
+      {{ bats|length }} batteries
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Batteries at this site</h2>
+  <div class="card-body" style="padding:0">
+    {% if bats %}
+    <table>
+      <thead><tr>{% for f in fields %}<th>{{ f.label }}</th>{% endfor %}<th>Health</th></tr></thead>
+      <tbody>
+        {% for r in bats %}
+        <tr>
+          {% for f in fields %}
+            {% if f.key == cfg.BATTERY_ID_FIELD %}
+              <td class="id"><a href="{{ url_for('battery_detail', bid=r[f.key]) }}">{{ r[f.key] }}</a></td>
+            {% elif f.key == 'status' %}<td><span class="pill">{{ r[f.key] or '—' }}</span></td>
+            {% else %}<td>{{ r[f.key] if r[f.key] not in (None,'') else '—' }}</td>{% endif %}
+          {% endfor %}
+          <td class="health"><span class="dot" style="background:{{ r._band.colour }}"></span>{{ r._band.label }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p class="muted" style="padding:16px 18px">No batteries currently at this site.</p>{% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <h2>Outages at this site</h2>
+  <div class="card-body" style="padding:0">
+    {% if outages %}
+    <table>
+      <thead><tr><th>Date</th><th>Duration (h)</th><th>Shut down</th><th>Voltage back</th><th>Remarks</th></tr></thead>
+      <tbody>
+        {% for o in outages %}
+        <tr><td>{{ o.outage_date }}</td><td>{{ o.duration_hours or '—' }}</td>
+            <td>{{ o.site_shut_down or '—' }}</td><td>{{ o.voltage_when_back or '—' }}</td>
+            <td>{{ o.remarks or '—' }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p class="muted" style="padding:16px 18px">No outages logged for this site.</p>{% endif %}
+  </div>
+</div>
+{% endblock %}

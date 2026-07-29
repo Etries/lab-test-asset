@@ -1,0 +1,15 @@
+site_id,region,power_setup,grid_available
+SITE-001,North,,No
+SITE-002,South,Wind Hybrid,Yes
+SITE-003,North,Solar + Wind Hybrid,Yes
+SITE-004,East,Grid + Battery Backup,No
+SITE-005,,,Yes
+SITE-006,South,Off-grid Solar,No
+SITE-007,South,Grid + Battery Backup,Yes
+SITE-008,Central,Solar Hybrid,Yes
+SITE-009,North,Grid + Battery Backup,No
+SITE-010,North,Solar + Wind Hybrid,No
+SITE-011,Central,Solar Hybrid,No
+SITE-012,Central,,No
+Store,Central,Off-grid Solar,No
+RECYCLE BIN,South,,Yes

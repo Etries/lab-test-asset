@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="page-head">
+  <div><h1>Power outages</h1><div class="count-note">{{ rows|length }} record(s)</div></div>
+  <a class="btn-primary" href="{{ url_for('outage_new') }}">+ Log outage</a>
+</div>
+
+<form class="filters" method="get">
+  <div class="filter-row">
+    <div class="filter-group">
+      <label for="site">Site</label>
+      <select id="site" name="site" onchange="this.form.submit()">
+        <option value="">All sites</option>
+        {% for s in all_sites %}<option value="{{ s }}" {{ 'selected' if args.get('site')==s }}>{{ s }}</option>{% endfor %}
+      </select>
+    </div>
+  </div>
+</form>
+
+{% if rows %}
+<div class="table-wrap">
+  <table>
+    <thead><tr>{% for f in fields %}<th>{{ f.label }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>{% for f in fields %}
+        {% if f.key == 'site_id' %}<td><a href="{{ url_for('site_detail', sid=r[f.key]) }}">{{ r[f.key] }}</a></td>
+        {% else %}<td>{{ r[f.key] if r[f.key] not in (None,'') else '—' }}</td>{% endif %}
+      {% endfor %}</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="empty-state"><h2>No outages logged</h2><p><a href="{{ url_for('outage_new') }}">Log the first one</a>.</p></div>
+{% endif %}
+{% endblock %}

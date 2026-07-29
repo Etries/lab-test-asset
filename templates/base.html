@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ cfg.APP_TITLE }}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('batteries') }}">
+      <span class="brand-mark"></span>
+      <span class="brand-text">{{ cfg.APP_TITLE }}</span>
+    </a>
+    <nav>
+      <a href="{{ url_for('batteries') }}">Batteries</a>
+      <a href="{{ url_for('sites') }}">Sites</a>
+      <a href="{{ url_for('outages') }}">Outages</a>
+      <a class="btn-primary" href="{{ url_for('battery_new') }}">+ New battery</a>
+    </nav>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flashes">
+        {% for cat, msg in messages %}
+          <div class="flash flash-{{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main>
+    {% block body %}{% endblock %}
+  </main>
+
+  <footer class="foot">{{ cfg.COMPANY_NAME }} · {{ cfg.APP_TITLE }}</footer>
+</body>
+</html>

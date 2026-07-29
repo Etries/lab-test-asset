@@ -1,0 +1,7 @@
+battery_id,reading_date,voltage,soh_pct,source
+BAT-1001,2022-06-01,12.8,98,Install
+BAT-1001,2023-06-01,12.6,90,Audit
+BAT-1001,2024-06-01,12.4,83,Audit
+BAT-1002,2023-06-01,12.5,,Audit
+BAT-1003,2023-02-01,12.2,55,Audit
+BAT-1003,2024-01-01,12,41,Audit

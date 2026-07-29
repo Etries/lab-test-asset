@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Move {{ b[cfg.BATTERY_ID_FIELD] }} · {{ cfg.APP_TITLE }}{% endblock %}
+{% block body %}
+<a class="back" href="{{ url_for('battery_detail', bid=b[cfg.BATTERY_ID_FIELD]) }}">← Back to {{ b[cfg.BATTERY_ID_FIELD] }}</a>
+<div class="page-head" style="margin-top:10px"><h1>Move {{ b[cfg.BATTERY_ID_FIELD] }}</h1></div>
+
+<div class="card">
+  <div class="card-body">
+    <p class="muted">Currently at <strong>{{ b.current_site or '—' }}</strong>.
+       Recording a move updates the battery and adds a row to its history.</p>
+    <form method="post">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="to_site">Destination site <span class="req">*</span></label>
+          <select id="to_site" name="to_site" required>
+            <option value=""></option>
+            {% for s in sites %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="reason">Reason</label>
+          <select id="reason" name="reason">
+            {% for r in reasons %}<option value="{{ r.reason }}">{{ r.reason }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="date_removed">Date removed from current site</label>
+          <input type="date" id="date_removed" name="date_removed" value="{{ now }}">
+        </div>
+        <div class="form-field">
+          <label for="date_installed">Date installed at destination</label>
+          <input type="date" id="date_installed" name="date_installed" value="{{ now }}">
+        </div>
+        <div class="form-field full">
+          <label for="remarks">Remarks</label>
+          <input type="text" id="remarks" name="remarks" placeholder="Optional note about this move">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-primary" type="submit">Record move</button>
+        <a class="btn-ghost" href="{{ url_for('battery_detail', bid=b[cfg.BATTERY_ID_FIELD]) }}">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# App data backups (keep the CSVs, drop the auto-backups)
+data/backups/
+
+# OS junk
+.DS_Store
+Thumbs.db

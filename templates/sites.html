@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="page-head"><div><h1>Sites</h1><div class="count-note">{{ summary|length }} site(s)</div></div></div>
+
+{% if summary %}
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Site</th><th>Batteries</th><th>By brand</th><th>Need replacing</th></tr></thead>
+    <tbody>
+      {% for s in summary %}
+      <tr>
+        <td class="id"><a href="{{ url_for('site_detail', sid=s.site_id) }}">{{ s.site_id }}</a></td>
+        <td>{{ s.count }}</td>
+        <td class="brandtag">
+          {% for brand, n in s.by_brand.items() %}{{ brand }} ×{{ n }}{{ ", " if not loop.last }}{% endfor %}
+          {% if not s.by_brand %}—{% endif %}
+        </td>
+        <td>{% if s.needs_replace %}<span class="pill" style="background:#fbe9e6;color:#9c2f20">{{ s.needs_replace }}</span>{% else %}0{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="empty-state"><h2>No sites yet</h2><p>Sites appear here once batteries reference them.</p></div>
+{% endif %}
+{% endblock %}

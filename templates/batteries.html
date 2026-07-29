@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="page-head">
+  <div>
+    <h1>Batteries</h1>
+    <div class="count-note">Showing {{ rows|length }} of {{ total }}</div>
+  </div>
+</div>
+
+{# ---- Search + sort (always visible) + the add-filter bar below ---- #}
+<form class="filters" method="get" id="filter-form">
+  <div class="filter-row">
+    <div class="filter-group" style="flex:1">
+      <label for="q">Search</label>
+      <input class="search-box" type="text" id="q" name="q"
+             value="{{ args.get('q','') }}" placeholder="Battery ID or model…">
+    </div>
+    <div class="filter-group">
+      <label for="sort">Sort by</label>
+      <select id="sort" name="sort">
+        <option value="battery_id" {{ 'selected' if args.get('sort')=='battery_id' }}>Battery ID</option>
+        <option value="soh" {{ 'selected' if args.get('sort')=='soh' }}>SoH %</option>
+        <option value="current_site" {{ 'selected' if args.get('sort')=='current_site' }}>Site</option>
+        <option value="status" {{ 'selected' if args.get('sort')=='status' }}>Status</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="dir">Order</label>
+      <select id="dir" name="dir">
+        <option value="asc" {{ 'selected' if args.get('dir','asc')=='asc' }}>Ascending</option>
+        <option value="desc" {{ 'selected' if args.get('dir')=='desc' }}>Descending</option>
+      </select>
+    </div>
+  </div>
+
+  {# active filter chips get injected here by filters.js #}
+  <div id="filter-rows" class="filter-rows"></div>
+
+  <div class="filter-row" style="align-items:center; gap:10px">
+    <div class="add-filter-wrap">
+      <button type="button" id="add-filter-btn" class="btn-ghost">+ Add filter</button>
+      <div id="add-filter-menu" class="add-filter-menu"></div>
+    </div>
+    <button class="btn-primary" type="submit">Apply</button>
+    <a class="btn-ghost" href="{{ url_for('batteries') }}">Clear all</a>
+  </div>
+</form>
+
+{% if rows %}
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        {% for f in fields %}<th>{{ f.label }}</th>{% endfor %}
+        <th>Health</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        {% for f in fields %}
+          {% if f.key == cfg.BATTERY_ID_FIELD %}
+            <td class="id"><a href="{{ url_for('battery_detail', bid=r[f.key]) }}">{{ r[f.key] }}</a></td>
+          {% elif f.key == 'current_site' %}
+            <td><a href="{{ url_for('site_detail', sid=r[f.key]) }}">{{ r[f.key] or '—' }}</a></td>
+          {% elif f.key == 'status' %}
+            <td><span class="pill">{{ r[f.key] or '—' }}</span></td>
+          {% else %}
+            <td>{{ r[f.key] if r[f.key] not in (None,'') else '—' }}</td>
+          {% endif %}
+        {% endfor %}
+        <td class="health"><span class="dot" style="background:{{ r._band.colour }}"></span>{{ r._band.label }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="empty-state">
+  <h2>No batteries match these filters</h2>
+  <p>Try removing a filter, or <a href="{{ url_for('battery_new') }}">add a battery</a>.</p>
+</div>
+{% endif %}
+
+{# ---- data for filters.js: available fields + their options, and what's active ---- #}
+<script>
+  window.FILTER_FIELDS = [
+    { key: "site", label: "Site", type: "search-select",
+      options: {{ all_sites|tojson }} },
+    { key: "brand", label: "Brand", type: "search-select",
+      options: {{ all_brands|tojson }} },
+    { key: "health", label: "Health", type: "multi",
+      options: [
+        {% for band in cfg.HEALTH_BANDS + [cfg.HEALTH_UNKNOWN] %}
+        { value: "{{ band.key }}", label: "{{ band.label }}", colour: "{{ band.colour }}" }{{ "," if not loop.last }}
+        {% endfor %}
+      ] },
+    { key: "status", label: "Status", type: "multi",
+      options: [ {% for s in all_statuses %}{ value: "{{ s }}", label: "{{ s }}" }{{ "," if not loop.last }}{% endfor %} ] }
+  ];
+  window.ACTIVE_FILTERS = {
+    site:   {{ args.getlist('site')|tojson }},
+    brand:  {{ args.getlist('brand')|tojson }},
+    health: {{ args.getlist('health')|tojson }},
+    status: {{ args.getlist('status')|tojson }}
+  };
+</script>
+<script src="{{ url_for('static', filename='filters.js') }}"></script>
+{% endblock %}

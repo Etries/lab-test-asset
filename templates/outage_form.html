@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body %}
+<a class="back" href="{{ url_for('outages') }}">← All outages</a>
+<div class="page-head" style="margin-top:10px"><h1>Log power outage</h1></div>
+<div class="card"><div class="card-body">
+  <form method="post">
+    <div class="form-grid">
+      {% for f in fields %}
+      <div class="form-field {{ 'full' if f.key == 'remarks' }}">
+        <label for="{{ f.key }}">{{ f.label }}{% if f.required %} <span class="req">*</span>{% endif %}</label>
+        {% if f.type == 'choice' %}
+          <select id="{{ f.key }}" name="{{ f.key }}">
+            <option value=""></option>
+            {% for opt in choices_for(f.choices) %}<option value="{{ opt }}" {{ 'selected' if row[f.key]==opt }}>{{ opt }}</option>{% endfor %}
+          </select>
+        {% elif f.type == 'number' %}
+          <input type="number" step="any" id="{{ f.key }}" name="{{ f.key }}" value="{{ row[f.key] }}">
+        {% elif f.type == 'date' %}
+          <input type="date" id="{{ f.key }}" name="{{ f.key }}" value="{{ row[f.key] or now }}">
+        {% else %}
+          <input type="text" id="{{ f.key }}" name="{{ f.key }}" value="{{ row[f.key] }}">
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="form-actions">
+      <button class="btn-primary" type="submit">Save outage</button>
+      <a class="btn-ghost" href="{{ url_for('outages') }}">Cancel</a>
+    </div>
+  </form>
+</div></div>
+{% endblock %}
