@@ -1,5 +1,1 @@
-site_id,outage_date,start_time,duration_hours,site_shut_down,devices_off,conserve_hours,voltage_when_back,remarks
-SITE-001,2024-05-12,14:30,3.5,No,Yes,2,11.9,grid trip
-SITE-001,2024-06-01,02:00,1,No,No,,12.4,
-SITE-002,2024-05-12,14:30,8,Yes,Yes,6,10.8,long outage
-SITE-004,2024-07-20,,5,Yes,Yes,4,,start time unknown
+site_id,outage_date,start_time,duration_hours,site_shut_down,devices_off,voltage_when_back,remarks

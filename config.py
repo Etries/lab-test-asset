@@ -18,6 +18,12 @@ DATA_DIR = "data"
 BACKUP_DIR = "data/backups"
 KEEP_BACKUPS = 40
 
+# The app keeps this shared workbook in sync with the data on every change, so
+# anyone can open it to read or take a copy. The app stays the editor; to bring
+# hand-edits back in, use the Import button in the app.
+WORKBOOK_FILE = "data/battery_inventory.xlsx"
+SYNC_WORKBOOK = True        # set False to stop auto-updating the .xlsx
+
 # -----------------------------------------------------------------------------
 # 2. THE APP'S NAME + WHICH PORT IT RUNS ON
 #    Open http://127.0.0.1:<PORT> in your browser after starting.
@@ -62,8 +68,8 @@ MOVEMENT_REASONS = [
 
 # Sites with these names get special treatment in the site dropdowns / views.
 # (They still behave like normal sites otherwise.)
-STORAGE_SITE = "Store"
-DECOMMISSION_SITE = "RECYCLE BIN"
+STORAGE_SITE = "Stock"
+DECOMMISSION_SITE = "Recycled"
 
 # -----------------------------------------------------------------------------
 # 5. THE BATTERY FIELDS
@@ -80,20 +86,24 @@ DECOMMISSION_SITE = "RECYCLE BIN"
 #      in_table : show this column in the main battery list?
 # -----------------------------------------------------------------------------
 BATTERY_FIELDS = [
-    {"key": "battery_id",       "label": "Battery ID",     "type": "text",   "required": True,  "in_table": True},
+    {"key": "battery_id",       "label": "Battery Nickname","type": "text",   "required": True,  "in_table": True},
     {"key": "brand",            "label": "Brand",          "type": "choice", "choices": "BRANDS", "in_table": True},
-    {"key": "model",            "label": "Model",          "type": "text",   "in_table": True},
+    {"key": "model",            "label": "Model",          "type": "text",   "in_table": False},
+    {"key": "supplier",         "label": "Supplier",       "type": "text",   "in_table": False},
     {"key": "delivery_date",    "label": "Delivery date",  "type": "date",   "in_table": False},
-    {"key": "capacity_ah",      "label": "Capacity (Ah)",  "type": "number", "in_table": False},
-    {"key": "nominal_voltage",  "label": "Nominal V",      "type": "number", "in_table": False},
-    {"key": "soh_pct",          "label": "SoH %",          "type": "number", "in_table": True},
-    {"key": "last_voltage",     "label": "Last voltage",   "type": "number", "in_table": False},
-    {"key": "internal_res_mohm","label": "Internal res (mΩ)","type": "number","in_table": False},
+    # --- the four measurement columns, in the same order as the printed sheet ---
+    {"key": "capacity_ah",      "label": "Capacity/Ah",    "type": "number", "in_table": False},
+    {"key": "tested_voltage",   "label": "Tested voltage", "type": "number", "in_table": False},
+    {"key": "internal_res_mohm","label": "Internal resistance","type": "number","in_table": False},
+    {"key": "tested_capacity",  "label": "Tested capacity","type": "number", "in_table": False},
+    {"key": "soh_pct",          "label": "SoH",            "type": "number", "in_table": True},
+    # ---------------------------------------------------------------------------
     {"key": "current_site",     "label": "Current site",   "type": "choice", "choices": "SITES", "in_table": True},
     {"key": "action",           "label": "Action",         "type": "text",   "in_table": False},
-    {"key": "remarks",          "label": "Remarks",        "type": "text",   "in_table": False},
+    {"key": "remarks",          "label": "Remark",         "type": "text",   "in_table": False},
     {"key": "date_fitted",      "label": "Date fitted",    "type": "date",   "in_table": False},
-    {"key": "last_moved_date",  "label": "Last moved",     "type": "date",   "in_table": False},
+    {"key": "last_moved_date",  "label": "Last moved date","type": "date",   "in_table": False},
+    {"key": "previous_site",    "label": "Previous site",  "type": "text",   "in_table": False},
     {"key": "status",           "label": "Status",         "type": "choice", "choices": "STATUSES", "in_table": True},
 ]
 

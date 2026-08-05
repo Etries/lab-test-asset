@@ -70,8 +70,24 @@ def _prune_backups(table):
             pass
 
 
+def _refresh_workbook():
+    """Rewrite the shared .xlsx snapshot. Guarded so a workbook problem (e.g. the
+    file is open in Excel and locked) never blocks the CSV save that just
+    succeeded — it just prints a note and moves on."""
+    if not getattr(config, "SYNC_WORKBOOK", True):
+        return
+    try:
+        export_workbook()
+    except PermissionError:
+        print("  [workbook] Could not update the .xlsx (is it open in Excel? "
+              "the CSV data is saved regardless).")
+    except Exception as e:
+        print(f"  [workbook] Skipped .xlsx refresh: {e}")
+
+
 def save(table, rows, headers):
-    """Write rows (list of dicts) to the table's CSV, atomically, with a backup."""
+    """Write rows (list of dicts) to the table's CSV, atomically, with a backup.
+    Also refreshes the shared workbook snapshot so the .xlsx stays current."""
     _ensure_dirs()
     _backup(table)
     path = _path(table)
@@ -82,6 +98,7 @@ def save(table, rows, headers):
         for row in rows:
             writer.writerow({h: row.get(h, "") for h in headers})
     os.replace(tmp, path)  # atomic on the same filesystem
+    _refresh_workbook()
 
 
 def append(table, row, default_fields):
@@ -95,3 +112,51 @@ def append(table, row, default_fields):
     rows.append(row)
     save(table, rows, headers)
     return rows
+
+
+# ---------------------------------------------------------------------------
+# WORKBOOK SYNC
+# The app keeps an .xlsx copy of everything in sync with the CSVs, so anyone
+# can open it to read (or take offline). This is written on every change.
+# The workbook is a SNAPSHOT for reading/sharing; the app remains the editor.
+# To feed hand-edits back in, use the Import button (which reads a workbook
+# back into the CSVs).
+# ---------------------------------------------------------------------------
+TABLES = ["batteries", "movements", "readings", "outages", "sites"]
+SHEET_NAMES = {
+    "batteries": "Batteries", "movements": "Movements", "readings": "Readings",
+    "outages": "Outages", "sites": "Sites",
+}
+
+
+def export_workbook(path=None):
+    """Write all tables into one .xlsx (one sheet per table)."""
+    import openpyxl
+    from openpyxl.styles import Font, PatternFill
+    path = path or getattr(config, "WORKBOOK_FILE", os.path.join(config.DATA_DIR, "battery_inventory.xlsx"))
+    wb = openpyxl.Workbook()
+    wb.remove(wb.active)
+    hdr_font = Font(bold=True, color="FFFFFF")
+    hdr_fill = PatternFill("solid", fgColor="1F4E79")
+    default_fields = {
+        "batteries": config.BATTERY_FIELDS,
+        "outages": config.OUTAGE_FIELDS,
+        "readings": config.READING_FIELDS,
+        "sites": config.SITE_FIELDS,
+        "movements": [{"key": k} for k in
+                      ["battery_id", "hop", "from_site", "to_site",
+                       "date_removed", "date_installed", "reason"]],
+    }
+    for table in TABLES:
+        ws = wb.create_sheet(SHEET_NAMES[table])
+        headers = load_headers(table, default_fields[table])
+        for i, h in enumerate(headers, 1):
+            c = ws.cell(1, i, h); c.font = hdr_font; c.fill = hdr_fill
+        for r, row in enumerate(load(table), 2):
+            for i, h in enumerate(headers, 1):
+                ws.cell(r, i, row.get(h, ""))
+        ws.freeze_panes = "A2"
+    tmp = path + ".tmp"
+    wb.save(tmp)
+    os.replace(tmp, path)   # atomic
+    return path

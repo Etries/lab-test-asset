@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="page-head"><div><h1>Import / Export</h1>
+  <div class="count-note">The workbook stays in sync with the app automatically.</div></div></div>
+
+<div class="grid2">
+  <div class="card">
+    <h2>Download the workbook</h2>
+    <div class="card-body">
+      <p class="muted">A single Excel file with a sheet for each table
+        (Batteries, Movements, Readings, Outages, Sites). This is kept up to date
+        every time you change something in the app — open it any time to read or
+        share, or hand it to someone to add rows.</p>
+      <p style="margin-top:6px">Current data:
+        {{ counts.batteries }} batteries · {{ counts.movements }} movements ·
+        {{ counts.outages }} outages · {{ counts.sites }} sites.</p>
+      <a class="btn-primary" href="{{ url_for('data_export') }}" style="margin-top:10px; display:inline-block">
+        Download battery_inventory.xlsx</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Import a workbook</h2>
+    <div class="card-body">
+      <p class="muted">If someone has added or edited rows in the Excel file by
+        hand, upload it here to bring those changes back into the app. This
+        replaces the current data with the workbook's contents.</p>
+      <p class="muted" style="margin-top:6px"><strong>A backup is taken
+        automatically</strong> before anything is overwritten, so you can roll
+        back if needed.</p>
+      <form method="post" action="{{ url_for('data_import') }}"
+            enctype="multipart/form-data" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+        <input type="file" name="workbook" accept=".xlsx,.xlsm" required>
+        <button class="btn-primary" type="submit">Upload &amp; import</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>How this works</h2>
+  <div class="card-body">
+    <p class="muted">The app edits its own data and keeps the Excel workbook in
+      step with it. Think of the app as the editor and the workbook as an always-current
+      copy for reading and sharing. When you (or a colleague) edit the workbook by
+      hand, bring it back in with <em>Import</em> above — that makes the uploaded
+      file the new truth. Avoid editing the workbook and the app at the very same
+      time, since the last import wins.</p>
+  </div>
+</div>
+{% endblock %}

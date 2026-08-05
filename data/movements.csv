@@ -1,6 +1,1 @@
 battery_id,hop,from_site,to_site,date_removed,date_installed,reason
-BAT-1003,1,SITE-001,SITE-005,2023-02-01,2023-02-04,Redeployment
-BAT-1008,1,SITE-002,Store,2024-01-10,,Fault - to store
-BAT-1015,1,SITE-004,SITE-009,2023-06-01,2023-06-03,Load balancing
-BAT-1015,2,SITE-009,RECYCLE BIN,2024-11-01,2024-11-01,Decommission
-BAT-1030,1,SITE-006,,2023-09-01,,Unknown destination

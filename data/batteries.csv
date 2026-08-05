@@ -1,56 +1,41 @@
-battery_id,brand,model,delivery_date,capacity_ah,nominal_voltage,soh_pct,last_voltage,internal_res_mohm,current_site,action,remarks,date_fitted,last_moved_date,status
-BAT-1001,Exide,EP200,2019-11-05,100,12,47,11.89,6,SITE-001,Keep,,2019-11-14,,Active
-BAT-1002,Ritar,RA12-200,2022-03-27,100,12,,11.93,,SITE-001,Pair Grade B,warranty,2022-04-15,,Active
-BAT-1003,Ritar,RA12-200,2022-06-21,150,12,75,12,,SITE-011,Target Solar,,2022-07-30,2024-02-07,Active
-BAT-1004,Ritar,RA12-200,2019-08-30,,12,54,12.64,,SITE-003,Replace,warranty,2019-09-25,,Active
-BAT-1005,Ritar,RA12-200,,200,12,43,12.55,11,SITE-005,,,2023-10-22,2026-02-01,Active
-BAT-1006,Ritar,RA12-200,2021-10-08,,12,66,12.4,12.1,SITE-005,Replace,fault,2021-10-21,2024-03-15,Active
-BAT-1007,Narada,12V150Ah,,200,12,64,11.96,,SITE-003,Pair Grade B,warranty,2020-05-01,2021-04-23,Active
-BAT-1008,Ritar,RA12-200,2021-07-24,150,12,85,,,SITE-011,Replace,,2021-09-02,,Active
-BAT-1009,Victron,AGM-200,2022-01-03,100,12,61,12.46,4.7,SITE-006,Target Solar,,2022-01-09,2022-07-20,Active
-BAT-1010,Ritar,RA12-200,2023-03-16,100,12,55,11.96,3.8,SITE-005,Keep,fault,2023-04-20,2025-07-26,Active
-BAT-1011,Victron,AGM-200,2020-12-29,100,12,99,12.63,6,SITE-009,,,2021-02-06,,Active
-BAT-1012,Ritar,RA12-200,2019-02-27,150,12,59,12.89,,SITE-008,Pair Grade B,,2019-03-20,,Active
-BAT-1013,Ritar,RA12-200,2021-09-08,200,12,50,12,7,SITE-006,Target Solar,,2021-09-18,,Active
-BAT-1014,Victron,AGM-200,2019-09-18,200,12,53,12.19,,SITE-010,Keep,ok,2019-10-22,2021-12-21,Active
-BAT-1015,Victron,AGM-200,2023-08-19,100,12,62,12.4,4.1,SITE-001,Target Solar,warranty,2023-09-09,,Active
-BAT-1016,Victron,AGM-200,2021-12-25,100,12,58,12.6,6.9,SITE-009,Target Solar,,2021-12-31,2023-07-24,Active
-BAT-1017,Ritar,RA12-200,2020-05-23,100,12,92,12.36,10.8,SITE-001,Target Solar,ok,2020-06-03,2022-03-04,Active
-BAT-1018,Exide,EP200,2022-02-19,150,12,,,10.5,SITE-004,Pair Grade B,,2022-03-24,,Active
-BAT-1019,Victron,AGM-200,2021-08-15,100,12,55,12.37,,SITE-002,,warranty,2021-09-14,2023-05-25,Active
-BAT-1020,Ritar,RA12-200,,100,12,,,,SITE-010,Pair Grade B,fault,2021-03-21,2022-12-25,Active
-BAT-1021,Narada,12V150Ah,2022-12-05,100,12,,11.9,,SITE-005,Replace,,2022-12-13,2025-03-16,Active
-BAT-1022,Narada,12V150Ah,2020-07-02,100,12,65,12.83,,SITE-001,Target Solar,,2020-08-09,,Active
-BAT-1023,Ritar,RA12-200,2020-05-27,100,12,,12.7,8.7,SITE-001,Target Solar,fault,2020-07-03,2022-05-18,Active
-BAT-1024,Victron,AGM-200,2020-12-02,,12,79,12.77,4.1,SITE-012,Target Solar,fault,2020-12-15,2022-06-02,Active
-BAT-1025,Exide,EP200,,150,12,92,12.4,,SITE-003,,,2019-04-25,,Active
-BAT-1026,Narada,12V150Ah,2020-07-25,100,12,,,,SITE-004,,warranty,2020-08-14,,Active
-BAT-1027,Victron,AGM-200,2022-09-08,150,12,76,,12.3,SITE-010,Target Solar,,2022-10-07,,Active
-BAT-1028,Ritar,RA12-200,,100,12,45,12.21,,SITE-012,Pair Grade B,,2023-09-08,,Active
-BAT-1029,Ritar,RA12-200,2023-03-13,150,12,,12.09,5.7,SITE-009,Target Solar,,2023-03-23,,Active
-BAT-1030,Exide,EP200,2023-04-20,200,12,53,,,SITE-011,Keep,,2023-05-07,2023-11-22,Active
-BAT-1031,Exide,EP200,2021-08-09,100,12,,12.3,13.7,SITE-002,Replace,,2021-09-18,,Active
-BAT-1032,Ritar,RA12-200,2019-10-18,200,12,51,12.57,12.9,SITE-005,,SoH low,2019-11-15,,Active
-BAT-1033,Narada,12V150Ah,2020-09-10,,12,83,,13.2,SITE-007,,,2020-10-07,,Active
-BAT-1034,Ritar,RA12-200,,200,12,70,12.07,,SITE-005,Replace,SoH low,2021-01-16,,Active
-BAT-1035,Narada,12V150Ah,,200,12,45,11.95,8.6,SITE-009,,,2023-12-17,,Active
-BAT-1036,Exide,EP200,2020-06-07,150,12,86,11.93,4.3,SITE-011,Target Solar,SoH low,2020-06-28,,Active
-BAT-1037,Narada,12V150Ah,2021-05-25,100,12,57,12.69,3.7,SITE-004,Target Solar,,2021-06-14,2022-01-12,Active
-BAT-1038,Exide,EP200,2020-11-23,200,12,81,,,SITE-008,Target Solar,fault,2020-12-15,,Active
-BAT-1039,Ritar,RA12-200,,150,12,97,12.38,8.2,SITE-012,,warranty,2019-10-23,2021-10-13,Active
-BAT-1040,Ritar,RA12-200,2023-08-18,,12,,,11,SITE-011,Replace,SoH low,2023-09-21,,Active
-BAT-1041,Ritar,RA12-200,2019-07-23,,12,68,12.9,6.8,SITE-009,Pair Grade B,ok,2019-08-09,2021-01-07,Active
-BAT-1042,Ritar,RA12-200,2021-04-23,200,12,37,12.53,,SITE-005,Replace,fault,2021-05-01,,Decommissioned
-BAT-1043,Victron,AGM-200,2019-01-14,100,12,43,12.05,,SITE-012,Target Solar,ok,2019-02-20,,Active
-BAT-1044,Ritar,RA12-200,2022-05-03,100,12,38,12.29,,SITE-007,Keep,,2022-05-11,2023-04-14,Active
-BAT-1045,Narada,12V150Ah,2019-03-07,,12,77,12.19,4.8,SITE-012,Pair Grade B,fault,2019-04-05,2020-08-19,Active
-BAT-1046,Narada,12V150Ah,2019-06-29,150,12,92,12.49,10.1,SITE-008,,,2019-07-16,2020-11-28,Active
-BAT-1047,Ritar,RA12-200,2020-06-10,,12,69,12.56,6.6,SITE-002,,,2020-07-06,2021-11-09,Active
-BAT-1048,Narada,12V150Ah,2023-05-09,150,12,98,12.61,11.6,SITE-005,Replace,,2023-06-10,,Active
-BAT-1049,Ritar,RA12-200,2021-11-14,150,12,43,12.88,,SITE-003,,SoH low,2021-12-04,2023-05-25,Active
-BAT-1050,Narada,12V150Ah,2019-12-21,200,12,65,12.12,,SITE-007,,,2020-01-24,2022-02-17,Active
-BAT-1051,Victron,AGM-200,2019-11-11,100,12,43,12.69,,SITE-010,Target Solar,ok,2019-11-28,2021-02-24,Active
-BAT-1052,Exide,EP200,2019-03-24,200,12,,12.36,9.8,SITE-004,,warranty,2019-04-05,,Active
-BAT-1053,Exide,EP200,2020-03-21,100,12,61,,6.9,SITE-006,Pair Grade B,,2020-04-04,2020-09-16,Active
-BAT-1054,Narada,12V150Ah,2022-01-27,100,12,,11.98,,SITE-007,Replace,,2022-02-07,,Active
-BAT-1055,Exide,EP200,2021-04-28,100,12,85,,4.5,SITE-006,Replace,,2021-05-15,,Active
+battery_id,brand,model,supplier,delivery_date,capacity_ah,tested_voltage,internal_res_mohm,tested_capacity,soh_pct,current_site,action,remarks,date_fitted,last_moved_date,previous_site,status
+Elecsol-110-001,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12,7,93,,Recycled,Recycled,Leaking electrolyte,24/08/2021,15/03/2021,Bolthu Hill,Decommissioned
+Elecsol-110-002,Elecsol,Carbon Fibre Monoblock,unknown,,110,,,96,36,Maidenhead,,,,15/03/2021,Gorteen,Active
+Elecsol-110-003,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,11.83,,,67,Bagenalstown,Removed,,24/08/2021,,Gorteen,Active
+Elecsol-110-004,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.54,,103,,Stock,Stock,Tested faulty,,15/03/2021,,Active
+Elecsol-110-005,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.26,5.7,,92,Gorteen,Keep,,,,Ballygunteen,Active
+Elecsol-110-006,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.65,,,40,Bagenalstown,,Leaking electrolyte,24/08/2021,15/03/2021,Ballygunteen,Active
+Elecsol-110-007,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.05,,110,,Maidenhead,Keep,ok,24/08/2021,15/03/2021,,Active
+Elecsol-110-008,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,,4.5,,65,Ballygunteen,,,24/08/2021,,,Active
+Elecsol-110-009,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.21,,104,92,Stock,Stock,Tested faulty,24/08/2021,15/03/2021,Maidenhead,Active
+Elecsol-110-010,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.15,3.9,91,37,Ballinakill,,Tested faulty,24/08/2021,15/03/2021,Bolthu Hill,Active
+Elecsol-110-011,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.49,6.7,,,Bagenalstown,Keep,,24/08/2021,15/03/2021,Bolthu Hill,Active
+Elecsol-110-012,Elecsol,Carbon Fibre Monoblock,unknown,,110,,,97,,Recycled,Recycled,,,15/03/2021,Bolthu Hill,Decommissioned
+Elecsol-110-013,Elecsol,Carbon Fibre Monoblock,unknown,,110,,7,96,78,Maidenhead,,,,15/03/2021,Ballinakill,Active
+Elecsol-110-014,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.04,,100,56,Ballygunteen,,,24/08/2021,,,Active
+Elecsol-110-015,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.51,4.5,,,Ballygunteen,Removed,Leaking electrolyte,,,Ballygunteen,Active
+Elecsol-110-016,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,,6.1,,44,Bolthu Hill,,,24/08/2021,15/03/2021,Ballinakill,Active
+Elecsol-110-017,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.8,6.6,100,51,Stock,Stock,,24/08/2021,15/03/2021,,Active
+Elecsol-110-018,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.67,8.5,101,,Gorteen,Keep,,24/08/2021,15/03/2021,,Active
+Elecsol-110-019,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,,4.3,106,89,Bagenalstown,,ok,24/08/2021,15/03/2021,Gorteen,Active
+Elecsol-110-020,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.73,4.6,107,56,Ballygunteen,,,,,,Active
+Elecsol-110-021,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,11.87,5.8,,86,Ballinakill,,,24/08/2021,15/03/2021,Gorteen,Active
+Elecsol-110-022,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,11.94,,,59,Bagenalstown,Removed,,24/08/2021,15/03/2021,,Active
+Elecsol-110-023,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.71,6.5,107,60,Ballygunteen,,,24/08/2021,15/03/2021,,Active
+Elecsol-110-024,Elecsol,Carbon Fibre Monoblock,unknown,,110,11.91,,,59,Bolthu Hill,Keep,ok,24/08/2021,,Bolthu Hill,Active
+Elecsol-110-025,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.7,7.4,100,47,Ballinakill,,Tested faulty,24/08/2021,,Ballygunteen,Active
+Elecsol-110-026,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.72,,,53,Recycled,Recycled,Leaking electrolyte,24/08/2021,15/03/2021,,Decommissioned
+Elecsol-110-027,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.02,,96,,Gorteen,Keep,,,15/03/2021,Bolthu Hill,Active
+Elecsol-110-028,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.8,7.8,,99,Gorteen,Removed,,24/08/2021,15/03/2021,,Active
+Elecsol-110-029,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.89,,,73,Bolthu Hill,,ok,24/08/2021,15/03/2021,Gorteen,Active
+Elecsol-110-030,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.06,6.3,,,Bagenalstown,,,24/08/2021,15/03/2021,Gorteen,Active
+Elecsol-110-031,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.85,,95,91,Bagenalstown,,,24/08/2021,,Gorteen,Active
+Elecsol-110-032,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.11,,97,71,Bolthu Hill,Removed,ok,24/08/2021,15/03/2021,,Active
+Elecsol-110-033,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,,6.4,,44,Bolthu Hill,,Tested faulty,,15/03/2021,,Active
+Elecsol-110-034,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.53,4.9,,80,Ballinakill,,Tested faulty,24/08/2021,,Ballinakill,Active
+Elecsol-110-035,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.6,,,99,Ballygunteen,,Tested faulty,,,,Active
+Elecsol-110-036,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.63,,101,39,Ballinakill,,,24/08/2021,15/03/2021,Ballinakill,Active
+Elecsol-110-037,Elecsol,Carbon Fibre Monoblock,unknown,,110,12.69,7.1,,62,Recycled,Recycled,,24/08/2021,,,Decommissioned
+Elecsol-110-038,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,,5.2,,90,Bagenalstown,Removed,,,15/03/2021,,Active
+Elecsol-110-039,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.83,5.9,99,76,Bagenalstown,,,24/08/2021,,,Active
+Elecsol-110-040,Elecsol,Carbon Fibre Monoblock,unknown,Unknown,110,12.72,4.5,99,59,Stock,Stock,Leaking electrolyte,24/08/2021,15/03/2021,Bolthu Hill,Active

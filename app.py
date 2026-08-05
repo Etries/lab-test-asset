@@ -248,7 +248,7 @@ def add_reading(bid):
     db.append("readings", reading, config.READING_FIELDS)
     # update the battery's latest values too
     if reading["voltage"]:
-        b["last_voltage"] = reading["voltage"]
+        b["tested_voltage"] = reading["voltage"]
     if reading["soh_pct"]:
         b["soh_pct"] = reading["soh_pct"]
     db.save("batteries", rows, db.load_headers("batteries", config.BATTERY_FIELDS))
@@ -325,7 +325,83 @@ def site_detail(sid):
 
 
 # ---------------------------------------------------------------------------
-# G. STARTUP
+# G. IMPORT / EXPORT (the workbook)
+# ---------------------------------------------------------------------------
+@app.route("/data")
+def data_page():
+    """Import/export hub: upload a workbook, or download the current one."""
+    import os
+    wb_exists = os.path.exists(config.WORKBOOK_FILE)
+    counts = {t: len(db.load(t)) for t in
+              ["batteries", "movements", "readings", "outages", "sites"]}
+    return render_template("data.html", wb_exists=wb_exists, counts=counts)
+
+
+@app.route("/data/export")
+def data_export():
+    """(Re)build the workbook and send it as a download."""
+    from flask import send_file
+    path = db.export_workbook()
+    return send_file(path, as_attachment=True,
+                     download_name="battery_inventory.xlsx")
+
+
+@app.route("/data/import", methods=["POST"])
+def data_import():
+    """Read an uploaded .xlsx back into the CSVs (hand-edits come back in here).
+    A backup of current data is taken automatically before overwriting."""
+    import os
+    file = request.files.get("workbook")
+    if not file or not file.filename:
+        flash("Please choose a file to import.", "error")
+        return redirect(url_for("data_page"))
+    if not file.filename.lower().endswith((".xlsx", ".xlsm")):
+        flash("Please upload an Excel .xlsx file.", "error")
+        return redirect(url_for("data_page"))
+
+    tmp_path = os.path.join(config.DATA_DIR, "_uploaded.xlsx")
+    os.makedirs(config.DATA_DIR, exist_ok=True)
+    file.save(tmp_path)
+    try:
+        import openpyxl
+        wb = openpyxl.load_workbook(tmp_path, data_only=True)
+        sheet_map = {
+            "Batteries": ("batteries", config.BATTERY_FIELDS),
+            "Movements": ("movements", [{"key": k} for k in
+                          ["battery_id", "hop", "from_site", "to_site",
+                           "date_removed", "date_installed", "reason"]]),
+            "Readings": ("readings", config.READING_FIELDS),
+            "Outages": ("outages", config.OUTAGE_FIELDS),
+            "Sites": ("sites", config.SITE_FIELDS),
+        }
+        summary = []
+        for sheet, (table, fields) in sheet_map.items():
+            if sheet not in wb.sheetnames:
+                continue
+            ws = wb[sheet]
+            rows = list(ws.iter_rows(values_only=True))
+            if not rows:
+                continue
+            headers = [str(h).strip() if h is not None else "" for h in rows[0]]
+            records = []
+            for raw in rows[1:]:
+                if all(c is None or str(c).strip() == "" for c in raw):
+                    continue
+                records.append({headers[i]: ("" if v is None else v)
+                                for i, v in enumerate(raw) if i < len(headers)})
+            db.save(table, records, headers)
+            summary.append(f"{sheet}: {len(records)}")
+        flash("Imported — " + ", ".join(summary) + ". The workbook is now in sync.", "ok")
+    except Exception as e:
+        flash(f"Import failed: {e}", "error")
+    finally:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+    return redirect(url_for("data_page"))
+
+
+# ---------------------------------------------------------------------------
+# H. STARTUP
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     import webbrowser
